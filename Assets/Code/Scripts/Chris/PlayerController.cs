@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -11,7 +12,8 @@ public class PlayerController : MonoBehaviour
     public int spaceOn;
 
     public UnityEngine.GameObject Board;
-    Transform[] boardSpaces;
+    private Transform[] boardSpaces;
+    public string movePointName;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +22,7 @@ public class PlayerController : MonoBehaviour
         movePoint.parent = null;
 
         //Get transforms of board spaces
-        boardSpaces = Board.GetComponentsInChildren<Transform>();
+        boardSpaces = Board.GetComponentsInChildren<Transform>().Where(o => o.tag == "MovePoint").ToArray();
 
         spaceOn = 0;
     }
@@ -38,23 +40,23 @@ public class PlayerController : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") == 1f && !(spaceOn + 1 > boardSpaces.Length - 1))
             {
                 spaceOn++;
-                movePoint.position = (boardSpaces[spaceOn].position);
+                movePoint.position = boardSpaces[spaceOn].position;
             }
             if (Input.GetAxisRaw("Horizontal") == -1f && !(spaceOn - 1 < 0))
             {
                 spaceOn--;
-                movePoint.position = (boardSpaces[spaceOn].position);
+                movePoint.position = boardSpaces[spaceOn].position;
             }
 
             if (Input.GetAxisRaw("Vertical") == 1f && !(spaceOn + 2 > boardSpaces.Length - 1))
             {
                 spaceOn += 2;
-                movePoint.position = (boardSpaces[spaceOn].position);
+                movePoint.position = boardSpaces[spaceOn].position;
             }
             if (Input.GetAxisRaw("Vertical") == -1f && !(spaceOn - 2 < 0))
             {
                 spaceOn -= 2;
-                movePoint.position = (boardSpaces[spaceOn].position);
+                movePoint.position = boardSpaces[spaceOn].position;
             }
         }
     }
