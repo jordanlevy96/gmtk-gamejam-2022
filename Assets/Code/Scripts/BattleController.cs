@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class BattleController : MonoBehaviour
 {
-    public Button StartBattle;
+    public Button startButton;
     public GameObject enemyStartDie;
     public GameObject playerStartDie;
 
@@ -29,6 +30,8 @@ public class BattleController : MonoBehaviour
     public GameObject playerDamage;
     public GameObject enemyDamage;
 
+    public GameObject victory;
+
     private void UpdateNumberInText(GameObject go, int newVal)
     {
         TextMeshProUGUI textField = go.GetComponent<TextMeshProUGUI>();
@@ -44,9 +47,14 @@ public class BattleController : MonoBehaviour
         // make sure damage is hidden before turn starts
         playerDamage.SetActive(false);
         enemyDamage.SetActive(false);
-        
+
+        // set up buttons
+        startButton.onClick.AddListener(StartTurn);
+        victory.SetActive(false); // make sure victory stuff is hidden
+        Button victoryButton = (Button) victory.GetComponentInChildren(typeof(Button), true);
+        victoryButton.onClick.AddListener(ReturnToBoard);
+
         // set up dice and health
-        StartBattle.onClick.AddListener(StartTurn);
         numPlayerDice = GameController.control.numPlayerDice;
         numEnemyDice = GameController.control.numEnemyDice;
 
@@ -87,12 +95,7 @@ public class BattleController : MonoBehaviour
         {
             PlayerDieRoller roll = die.GetComponent<PlayerDieRoller>();
             roll.StartRolling();
-            // total += roll.finalVal;
-            // UpdateNumberInText(playerDamage, total);
         }
-
-        // playerLastRoll = total;
-        // Debug.Log("Player dealt " + total + " damage");
     }
 
     private void RollEnemyDice()
@@ -132,7 +135,6 @@ public class BattleController : MonoBehaviour
         if (rollingPlayerDice)
         {
             int playerTotal = 0;
-            int enemyTotal = 0;
             int diceRolled = 0;
             foreach (GameObject die in playerDice)
             {
@@ -158,20 +160,30 @@ public class BattleController : MonoBehaviour
                 StartCoroutine("FinalizeTurn", enemyDice);
             }
         }
+
+        if (playerHealth <= 0)
+        {
+            // game over
+            // TODO: send back to main menu (which doesn't exist at time of writing)
+            Debug.Log("Game over");
+            startButton.gameObject.SetActive(false); // prevent user from continuing despite being dead
+        }
+        else if (enemyHealth <= 0)
+        {
+            victory.SetActive(true);
+            startButton.gameObject.SetActive(false);
+        }
     }
 
     // stops all the enemy dice rolling, then applies damage for all rolls
     private IEnumerator FinalizeTurn(GameObject[] dice)
     {
         int enemyTotal = 0;
-        Debug.Log("coroutining");
         foreach (GameObject die in dice)
         {
             EnemyDieRoller roll = die.GetComponent<EnemyDieRoller>();
             roll.StopRolling();
-            Debug.Log("roll val before wait: " + roll.finalVal);
             yield return new WaitForSeconds(0.2f);
-            Debug.Log("roll val after wait: " + roll.finalVal);
             enemyTotal += roll.finalVal;
         }
 
@@ -181,5 +193,10 @@ public class BattleController : MonoBehaviour
 
         // apply damage after enemy logic is handled
         ApplyDamage();
+    }
+
+    private void ReturnToBoard()
+    {
+        EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/Board.unity", new LoadSceneParameters(LoadSceneMode.Single));
     }
 }

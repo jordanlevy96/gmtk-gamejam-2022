@@ -54,8 +54,9 @@ public class PlayerDieRoller : MonoBehaviour
             // Set sprite to upper face of dice from array according to next value
             image.sprite = diceSides[diceSide];
 
-            // Pause before next itteration
-            yield return new WaitForSeconds(0.05f);
+            // Pause before next iteration; subtracting based on speedMod means higher mod == faster
+            // this actually works with negative wait time (somehow)
+            yield return new WaitForSeconds(0.05f - 0.01f * GameController.control.speedMod);
         }
 
         finalSide = diceSide + 1;
