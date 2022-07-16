@@ -35,36 +35,18 @@ public class RNG : MonoBehaviour
     {
         rollValue = Random.Range(1, 7); //"roll" a dice. Gets a number inclusivley between 1-6
 
-        text.text = "You rolled a: " + rollValue; // Set the UI text
+        
 
-        if (!(GameController.control.spaceOn + rollValue > Player.boardSpaces.Count - 1)) // if not out of range, set the dice to the specified spot and indicate it is time to load the next scene
+        if (GameController.control.spaceOn + rollValue > Player.boardSpaces.Count - 1)// ifout of range, set the players rollvalue to thye max space
         {
-            GameController.control.spaceOn += rollValue;
-            switch (Board.transform.GetChild(GameController.control.spaceOn).gameObject.GetComponent<SpaceController>().modifierType) // Do action depending on modifier type of space
-            {
-                case SpaceController.Modifier.AddDice:
-                    GameController.control.numberOfDice++;
-                    break;
 
-                case SpaceController.Modifier.RemoveDice:
-                    GameController.control.numberOfDice--;
-                    break;
+            rollValue = Player.boardSpaces.Count - 1 - GameController.control.spaceOn;
 
-                case SpaceController.Modifier.SpeedUp:
-                    GameController.control.diceSpeed++;
-                    break;
 
-                case SpaceController.Modifier.SpeedDown:
-                    GameController.control.diceSpeed--;
-                    break;
-                case SpaceController.Modifier.Enemy:
-                    Player.loadNewScene = true;
-                    break;
-                case SpaceController.Modifier.Nothing:
-                    break;
-
-            }
         }
+
+        Player.GetComponent<PlayerController>().rollValue = rollValue;
+        text.text = "You rolled a: " + rollValue; // Set the UI text
     }
 
 

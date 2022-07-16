@@ -19,6 +19,11 @@ public class PlayerController : MonoBehaviour
     public string spaceMovePointTag; // Tag of the point the player should move to (used to find the point hovering above the board space)
     [HideInInspector]
     public bool loadNewScene; // Flag to indicate it is time to load the next scene
+    
+    private int spacesMovedThisTurn = 0; // Number of spaces moved this turn
+    [HideInInspector]
+    public int rollValue; // value of dice roll
+
 
 
 
@@ -29,6 +34,7 @@ public class PlayerController : MonoBehaviour
         //To keep things organized, remove parent
         playerMovePoint.parent = null;
 
+        rollValue = -1; //No movement on scene start
 
         GetAllChildren(); // Populate board spaces
         //Get transforms of board spaces
@@ -48,11 +54,53 @@ public class PlayerController : MonoBehaviour
 
         playerMovePoint.position = boardSpaces[GameController.control.spaceOn].transform.GetChild(0).position; // move the dice's move point to the board space
 
-        if (Vector3.Distance(transform.position, playerMovePoint.position) <= .05f && loadNewScene) // if player is close to the move point and it is time to load the next scene
+        if (Vector3.Distance(transform.position, playerMovePoint.position) <= .05f) // if player is close to the move point
         {
 
-            //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
-            EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/BattleScreen.unity", new LoadSceneParameters(LoadSceneMode.Single));
+            if (spacesMovedThisTurn == rollValue)
+            {
+                spacesMovedThisTurn = 0;
+                rollValue = -1; // this will get reset by the next dice roll
+
+                switch (Board.transform.GetChild(GameController.control.spaceOn).gameObject.GetComponent<SpaceController>().modifierType) // Do action depending on modifier type of space
+                {
+                    case SpaceController.Modifier.AddDice:
+                        GameController.control.numPlayerDice++;
+                        break;
+
+                    case SpaceController.Modifier.RemoveDice:
+                        GameController.control.numPlayerDice--;
+                        break;
+
+                    case SpaceController.Modifier.SpeedUp:
+                        GameController.control.speedMod++;
+                        break;
+
+                    case SpaceController.Modifier.SpeedDown:
+                        GameController.control.speedMod--;
+                        break;
+                    case SpaceController.Modifier.Enemy:
+                        //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
+                        EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/BattleScreen.unity", new LoadSceneParameters(LoadSceneMode.Single));
+                        break;
+                    case SpaceController.Modifier.Nothing:
+                        break;
+
+                }
+            }
+
+            if (spacesMovedThisTurn < rollValue)
+            {
+                
+                GameController.control.spaceOn++;
+                spacesMovedThisTurn++;
+                if(Board.transform.GetChild(GameController.control.spaceOn).gameObject.GetComponent<SpaceController>().modifierType == SpaceController.Modifier.Enemy)
+                {
+                    spacesMovedThisTurn = rollValue; // Stop at enemy spot
+                }
+                
+            }
+            
 
         }
     }

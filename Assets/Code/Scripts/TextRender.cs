@@ -10,11 +10,11 @@ public class TextRender : MonoBehaviour
     {
         if (CompareTag("DiceSpeedText"))
         {
-            gameObject.GetComponent<TextMeshProUGUI>().text = "Dice Speed: " + GameController.control.diceSpeed;
+            gameObject.GetComponent<TextMeshProUGUI>().text = "Dice Speed: " + GameController.control.speedMod;
         }
         else if (CompareTag("DiceNumberText"))
         {
-            gameObject.GetComponent<TextMeshProUGUI>().text = "Number of Dice: " + GameController.control.numberOfDice;
+            gameObject.GetComponent<TextMeshProUGUI>().text = "Number of Dice: " + GameController.control.numPlayerDice;
         }
 
         

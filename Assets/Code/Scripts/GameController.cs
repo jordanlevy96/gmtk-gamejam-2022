@@ -11,8 +11,8 @@ public class GameController : MonoBehaviour
     public static GameController control; // Static reference to GameController to save variables between scenes
     public int spaceOn; // The current board space the player is on
 
-    public int numberOfDice; // number of dice the player has
-    public float diceSpeed; // Speed at which the dice rolls
+    public int numPlayerDice; // number of dice the player has
+    public int speedMod; // Speed at which the dice rolls
 
     void Awake()
     {
