@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
 
     public UnityEngine.GameObject Board;
     private Transform[] boardSpaces;
-    public string movePointName;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +21,7 @@ public class PlayerController : MonoBehaviour
         movePoint.parent = null;
 
         //Get transforms of board spaces
-        boardSpaces = Board.GetComponentsInChildren<Transform>().Where(o => o.tag == "MovePoint").ToArray();
+        boardSpaces = Board.GetComponentsInChildren<Transform>().Where(o => o.tag == "MovePoint").ToArray(); //Using System.Linq "Where" method nicely iterates the array dn does the operations specified
 
         spaceOn = 0;
     }
