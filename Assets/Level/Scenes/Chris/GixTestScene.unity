@@ -992,9 +992,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  movePoint: {fileID: 2056134029}
+  playerMovePoint: {fileID: 2056134029}
   spaceOn: 0
   Board: {fileID: 578968931}
+  spaceMovePointTag: MovePoint
 --- !u!1001 &1658596226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1194,14 +1195,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966386262}
-  m_LocalRotation: {x: 0.020926945, y: -0.6769432, z: 0.019954607, w: 0.7354671}
+  m_LocalRotation: {x: 0.018050712, y: -0.5717924, z: 0.022589719, w: 0.81988865}
   m_LocalPosition: {x: 6.1, y: 4.195, z: -11.219}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 3.313, y: -85.253, z: 0.058}
+  m_LocalEulerAnglesHint: {x: 3.178, y: -69.758, z: 0.941}
 --- !u!114 &1966386266
 MonoBehaviour:
   m_ObjectHideFlags: 0
