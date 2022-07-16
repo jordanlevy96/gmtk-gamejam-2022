@@ -16,6 +16,8 @@ public class BattleController : MonoBehaviour
     private GameObject[] enemyDice;
     private GameObject[] playerDice;
 
+    private bool rollingPlayerDice;
+
     private int enemyLastRoll;
     private int playerLastRoll;
 
@@ -24,7 +26,10 @@ public class BattleController : MonoBehaviour
     private int playerHealth;
     public GameObject playerHealthDisplay;
 
-    private void UpdateHealthField(GameObject go, int newVal)
+    public GameObject playerDamage;
+    public GameObject enemyDamage;
+
+    private void UpdateNumberInText(GameObject go, int newVal)
     {
         TextMeshProUGUI textField = go.GetComponent<TextMeshProUGUI>();
         string oldText = textField.text.ToString();
@@ -36,19 +41,24 @@ public class BattleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartBattle.onClick.AddListener(RollDice);
+        // make sure damage is hidden before turn starts
+        playerDamage.SetActive(false);
+        enemyDamage.SetActive(false);
+        
+        // set up dice and health
+        StartBattle.onClick.AddListener(StartTurn);
         numPlayerDice = GameController.control.numPlayerDice;
         numEnemyDice = GameController.control.numEnemyDice;
 
         enemyDice = new GameObject[numEnemyDice];
         SpawnDice(numEnemyDice, enemyStartDie, enemyDice);
         enemyHealth = numEnemyDice * 6;
-        UpdateHealthField(enemyHealthDisplay, enemyHealth);
+        UpdateNumberInText(enemyHealthDisplay, enemyHealth);
         
         playerDice = new GameObject[numPlayerDice];
         SpawnDice(numPlayerDice, playerStartDie, playerDice);
         playerHealth = numPlayerDice * 6;
-        UpdateHealthField(playerHealthDisplay, playerHealth);
+        UpdateNumberInText(playerHealthDisplay, playerHealth);
     }
 
     private void SpawnDice(int numDice, GameObject startDie, GameObject[] dice)
@@ -69,16 +79,20 @@ public class BattleController : MonoBehaviour
 
     private void RollPlayerDice()
     {
-        int total = 0;
+        rollingPlayerDice = true; 
+        UpdateNumberInText(playerDamage, 0);
+        playerDamage.SetActive(true);
 
         foreach (GameObject die in playerDice)
         {
             PlayerDieRoller roll = die.GetComponent<PlayerDieRoller>();
             roll.StartRolling();
-            total += roll.finalVal;
+            // total += roll.finalVal;
+            // UpdateNumberInText(playerDamage, total);
         }
 
-        playerLastRoll = total;
+        // playerLastRoll = total;
+        // Debug.Log("Player dealt " + total + " damage");
     }
 
     private void RollEnemyDice()
@@ -91,21 +105,81 @@ public class BattleController : MonoBehaviour
             roll.TriggerRoll();
             total += roll.finalVal;
         }
-
-        enemyLastRoll = total;
     }
 
-    private void RollDice()
+    private void StartTurn()
     {
-        StartCoroutine("RollEnemyDice");
-        // StartCoroutine("RollPlayerDice");
-        RollPlayerDice();
+        // hide damage rolls from last turn
+        playerDamage.SetActive(false);
+        enemyDamage.SetActive(false);
 
+        // start both sets of dice rolling at once
+        StartCoroutine("RollEnemyDice");
+        RollPlayerDice();
+    }
+
+    private void ApplyDamage()
+    {
+        playerHealth -= enemyLastRoll;
+        UpdateNumberInText(playerHealthDisplay, playerHealth);
+        enemyHealth -= playerLastRoll;
+        UpdateNumberInText(enemyHealthDisplay, enemyHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (rollingPlayerDice)
+        {
+            int playerTotal = 0;
+            int enemyTotal = 0;
+            int diceRolled = 0;
+            foreach (GameObject die in playerDice)
+            {
+                PlayerDieRoller roll = die.GetComponent<PlayerDieRoller>();
+                if (roll.finalVal == -1)
+                {
+                    break;
+                }
+                diceRolled++;
+                playerTotal += roll.finalVal;
+                UpdateNumberInText(playerDamage, playerTotal);
+            }
+
+            if (diceRolled == numPlayerDice)
+            {
+                rollingPlayerDice = false;
+                playerLastRoll = playerTotal;
+                foreach (GameObject die in playerDice)
+                {
+                    PlayerDieRoller roll = die.GetComponent<PlayerDieRoller>();
+                    roll.ResetDie();
+                }
+                StartCoroutine("FinalizeTurn", enemyDice);
+            }
+        }
+    }
+
+    // stops all the enemy dice rolling, then applies damage for all rolls
+    private IEnumerator FinalizeTurn(GameObject[] dice)
+    {
+        int enemyTotal = 0;
+        Debug.Log("coroutining");
+        foreach (GameObject die in dice)
+        {
+            EnemyDieRoller roll = die.GetComponent<EnemyDieRoller>();
+            roll.StopRolling();
+            Debug.Log("roll val before wait: " + roll.finalVal);
+            yield return new WaitForSeconds(0.2f);
+            Debug.Log("roll val after wait: " + roll.finalVal);
+            enemyTotal += roll.finalVal;
+        }
+
+        enemyLastRoll = enemyTotal;
+        UpdateNumberInText(enemyDamage, enemyLastRoll);
+        enemyDamage.SetActive(true);
+
+        // apply damage after enemy logic is handled
+        ApplyDamage();
     }
 }

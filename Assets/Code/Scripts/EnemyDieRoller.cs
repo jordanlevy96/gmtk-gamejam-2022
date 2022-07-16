@@ -12,6 +12,7 @@ public class EnemyDieRoller : MonoBehaviour
     private Image image;
 
     public int finalVal;
+    public bool rolling;
 
     private void Start()
     {
@@ -21,6 +22,11 @@ public class EnemyDieRoller : MonoBehaviour
     public void TriggerRoll()
     {
         StartCoroutine("EnemyRoll");
+    }
+
+    public void StopRolling()
+    {
+        rolling = false;
     }
 
     // Coroutine that rolls the dice for the enemy
@@ -33,9 +39,9 @@ public class EnemyDieRoller : MonoBehaviour
         // Final side or value that dice reads in the end of coroutine
         int finalSide = 0;
 
-        // Loop to switch dice sides ramdomly
-        // before final side appears. 20 itterations here.
-        for (int i = 0; i <= 20; i++)
+        rolling = true;
+        // rolling stops when player is done rolling
+        while (rolling)
         {
             // Pick up random value from 0 to 5 (All inclusive)
             randomDiceSide = Random.Range(0, 5);
@@ -43,7 +49,7 @@ public class EnemyDieRoller : MonoBehaviour
             // Set sprite to upper face of dice from array according to random value
             image.sprite = diceSides[randomDiceSide];
 
-            // Pause before next itteration
+            // Pause before next iteration
             yield return new WaitForSeconds(0.05f);
         }
 

@@ -16,7 +16,12 @@ public class PlayerDieRoller : MonoBehaviour
         rolling = false;
         this.GetComponent<Button>().onClick.AddListener(StopRolling);
         image = GetComponent<Image>();
+        finalVal = -1;
+    }
 
+    public void ResetDie()
+    {
+        finalVal = -1;
     }
 
     private void StopRolling()
@@ -53,11 +58,10 @@ public class PlayerDieRoller : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
 
-        // Assigning final side so you can use this value later in your game
-        // for player movement for example
         finalSide = diceSide + 1;
 
         finalVal = finalSide;
+        Debug.Log("Finished rolling player die with value " + finalVal);
     }
 
     // Update is called once per frame
