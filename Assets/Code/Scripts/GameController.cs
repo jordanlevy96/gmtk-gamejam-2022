@@ -10,9 +10,12 @@ public class GameController : MonoBehaviour
 
     public static GameController control; // Static reference to GameController to save variables between scenes
     public int spaceOn; // The current board space the player is on
+    public int statRoll; // Most recent number rolled TODO: remove
 
-    public int numPlayerDice; // number of dice the player has
-    public int speedMod; // Speed at which the dice rolls
+    public int numPlayerDice; // player dice pool
+    public int numEnemyDice; // enemy dice pool
+
+    public int speedMod;
 
     void Awake()
     {
@@ -29,7 +32,9 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //spaceOn = 0;
+        spaceOn = 0;
+        numPlayerDice = 4;
+        numEnemyDice = 3;
     }
 
     // Update is called once per frame
