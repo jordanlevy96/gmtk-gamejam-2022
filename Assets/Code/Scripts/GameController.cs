@@ -10,7 +10,11 @@ public class GameController : MonoBehaviour
 
     public static GameController control;
     public int spaceOn; // The current board space the player is on
-    public int statRoll; // Most recent number rolled
+    public int statRoll; // Most recent number rolled TODO: remove
+
+    public int numPlayerDice; // player dice pool
+    public int numEnemyDice; // enemy dice pool
+
     void Awake()
     {
         if (control == null)
@@ -27,6 +31,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         spaceOn = 0;
+        numPlayerDice = 4;
     }
 
     // Update is called once per frame
