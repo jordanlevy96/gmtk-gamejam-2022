@@ -4,10 +4,8 @@ using UnityEngine.UI;
 
 // base code from https://www.youtube.com/watch?v=JgbJZdXDNtg
 
-public class DieRoller : MonoBehaviour
+public class EnemyDieRoller : MonoBehaviour
 {
-
-    // Array of dice sides sprites to load from Resources folder
     public Sprite[] diceSides;
 
     // Reference to sprite renderer to change sprites
@@ -15,18 +13,11 @@ public class DieRoller : MonoBehaviour
 
     public int finalVal;
 
-    // Use this for initialization
     private void Start()
     {
-
-        // Assign Renderer component
         image = GetComponent<Image>();
-
-        // Load dice sides sprites to array from DiceSides subfolder of Resources folder
-        // diceSides = Resources.LoadAll<Sprite>("DieSides/");
     }
 
-    // If you left click over the dice then RollTheDice coroutine is started
     public void TriggerRoll()
     {
         StartCoroutine("EnemyRoll");
@@ -59,9 +50,6 @@ public class DieRoller : MonoBehaviour
         // Assigning final side so you can use this value later in your game
         // for player movement for example
         finalSide = randomDiceSide + 1;
-
-        // Show final dice value in Console
-        Debug.Log(finalSide);
 
         finalVal = finalSide;
     }
