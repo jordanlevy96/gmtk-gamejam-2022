@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     public int numPlayerDice; // player dice pool
     public int numEnemyDice; // enemy dice pool
 
+    public int speedMod;
+
     void Awake()
     {
         if (control == null)

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class BattleController : MonoBehaviour
 {
@@ -17,19 +19,36 @@ public class BattleController : MonoBehaviour
     private int enemyLastRoll;
     private int playerLastRoll;
 
+    private int enemyHealth;
+    public GameObject enemyHealthDisplay;
+    private int playerHealth;
+    public GameObject playerHealthDisplay;
+
+    private void UpdateHealthField(GameObject go, int newVal)
+    {
+        TextMeshProUGUI textField = go.GetComponent<TextMeshProUGUI>();
+        string oldText = textField.text.ToString();
+        System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("\\d+");
+        string newText = regex.Replace(oldText, newVal.ToString());
+        textField.text = newText;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Battle Controller");
         StartBattle.onClick.AddListener(RollDice);
         numPlayerDice = GameController.control.numPlayerDice;
         numEnemyDice = GameController.control.numEnemyDice;
 
         enemyDice = new GameObject[numEnemyDice];
         SpawnDice(numEnemyDice, enemyStartDie, enemyDice);
-
+        enemyHealth = numEnemyDice * 6;
+        UpdateHealthField(enemyHealthDisplay, enemyHealth);
+        
         playerDice = new GameObject[numPlayerDice];
         SpawnDice(numPlayerDice, playerStartDie, playerDice);
+        playerHealth = numPlayerDice * 6;
+        UpdateHealthField(playerHealthDisplay, playerHealth);
     }
 
     private void SpawnDice(int numDice, GameObject startDie, GameObject[] dice)
