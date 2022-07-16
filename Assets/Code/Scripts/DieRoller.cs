@@ -13,7 +13,7 @@ public class DieRoller : MonoBehaviour
     // Reference to sprite renderer to change sprites
     private Image image;
 
-    private int finalVal;
+    public int finalVal;
 
     // Use this for initialization
     private void Start()
@@ -29,7 +29,6 @@ public class DieRoller : MonoBehaviour
     // If you left click over the dice then RollTheDice coroutine is started
     public void TriggerRoll()
     {
-        Debug.Log("Rolling...");
         StartCoroutine("EnemyRoll");
     }
 

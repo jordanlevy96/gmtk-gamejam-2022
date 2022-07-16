@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
     {
         spaceOn = 0;
         numPlayerDice = 4;
+        numEnemyDice = 3;
     }
 
     // Update is called once per frame
