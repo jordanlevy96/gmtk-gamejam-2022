@@ -4,14 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Level/Scenes/Chris/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
-    path: Assets/Level/Scenes/Chris/GixTestScene.unity
-    guid: 32d2c2c04c5ad9a418506ac23db395d9
-  - enabled: 1
-    path: Assets/Level/Scenes/Chris/BattleScreen.unity
-    guid: f8dbab6aac9e5ec4ab5216b8ef8449d0
+  m_Scenes: []
   m_configObjects: {}
