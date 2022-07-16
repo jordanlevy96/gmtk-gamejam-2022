@@ -13,9 +13,11 @@ public class PlayerController : MonoBehaviour
     public Transform playerMovePoint;
 
     public GameObject Board;
-    private Transform[] boardSpaces;
+    [HideInInspector]
+    public Transform[] boardSpaces;
     public string spaceMovePointTag;
-    private bool loadNewScene;
+    [HideInInspector]
+    public bool loadNewScene;
 
     
 
@@ -40,37 +42,40 @@ public class PlayerController : MonoBehaviour
         //Gives the dice a smooth transition to the player's move point
         transform.position = Vector3.MoveTowards(transform.position, playerMovePoint.position, moveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, playerMovePoint.position) <= .05f)
+        playerMovePoint.position = boardSpaces[GameController.control.spaceOn].position; // move the dice's move point to the board space
+
+        if (Vector3.Distance(transform.position, playerMovePoint.position) <= .05f && loadNewScene)
         {
 
-            if (loadNewScene)
-            {
+            
+
+            
                 //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
                 EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/Chris/BattleScreen.unity", new LoadSceneParameters(LoadSceneMode.Single));
-            }
+            
 
 
-            if (Input.GetAxisRaw("Horizontal") == 1f && !(GameController.control.spaceOn + 1 > boardSpaces.Length - 1) && !loadNewScene)
-            {
-                GameController.control.spaceOn++; // iterate the array of board spaces
-                
-                //loadNewScene = true; // prepare to load scene
+            //if (Input.GetAxisRaw("Horizontal") == 1f && !(GameController.control.spaceOn + 1 > boardSpaces.Length - 1) && !loadNewScene)
+            //{
+            //    GameController.control.spaceOn++; // iterate the array of board spaces
 
-            }
-            if (Input.GetAxisRaw("Horizontal") == -1f && !(GameController.control.spaceOn - 1 < 0) && !loadNewScene)
-            {
-                GameController.control.spaceOn--;
-            }
+            //    loadNewScene = true; // prepare to load scene
 
-            if (Input.GetAxisRaw("Vertical") == 1f && !(GameController.control.spaceOn + 2 > boardSpaces.Length - 1) && !loadNewScene)
-            {
-                GameController.control.spaceOn += 2;
-            }
-            if (Input.GetAxisRaw("Vertical") == -1f && !(GameController.control.spaceOn - 2 < 0) && !loadNewScene)
-            {
-                GameController.control.spaceOn -= 2;
-            }
-            playerMovePoint.position = boardSpaces[GameController.control.spaceOn].position; // move the dice's move point to the board space
+            //}
+            //if (Input.GetAxisRaw("Horizontal") == -1f && !(GameController.control.spaceOn - 1 < 0) && !loadNewScene)
+            //{
+            //    GameController.control.spaceOn--;
+            //}
+
+            //if (Input.GetAxisRaw("Vertical") == 1f && !(GameController.control.spaceOn + 2 > boardSpaces.Length - 1) && !loadNewScene)
+            //{
+            //    GameController.control.spaceOn += 2;
+            //}
+            //if (Input.GetAxisRaw("Vertical") == -1f && !(GameController.control.spaceOn - 2 < 0) && !loadNewScene)
+            //{
+            //    GameController.control.spaceOn -= 2;
+            //}
+            
         }
     }
 }

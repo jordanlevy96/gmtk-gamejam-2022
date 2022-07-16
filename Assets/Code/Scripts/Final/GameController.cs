@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
 
     public static GameController control;
     public int spaceOn; // The current board space the player is on
+    public int statRoll; // Most recent number rolled
     void Awake()
     {
         if (control == null)

@@ -17,7 +17,7 @@ public class PlayerBattleController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/Chris/GixTestScene.unity", new LoadSceneParameters(LoadSceneMode.Single));
+            EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/Final/Board.unity", new LoadSceneParameters(LoadSceneMode.Single));
         }
     }
 }
