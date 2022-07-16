@@ -50,23 +50,23 @@ public class PlayerController : MonoBehaviour
             }
 
 
-            if (Input.GetAxisRaw("Horizontal") == 1f && !(GameController.control.spaceOn + 1 > boardSpaces.Length - 1))
+            if (Input.GetAxisRaw("Horizontal") == 1f && !(GameController.control.spaceOn + 1 > boardSpaces.Length - 1) && !loadNewScene)
             {
                 GameController.control.spaceOn++; // iterate the array of board spaces
                 
                 loadNewScene = true; // prepare to load scene
 
             }
-            if (Input.GetAxisRaw("Horizontal") == -1f && !(GameController.control.spaceOn - 1 < 0))
+            if (Input.GetAxisRaw("Horizontal") == -1f && !(GameController.control.spaceOn - 1 < 0) && !loadNewScene)
             {
                 GameController.control.spaceOn--;
             }
 
-            if (Input.GetAxisRaw("Vertical") == 1f && !(GameController.control.spaceOn + 2 > boardSpaces.Length - 1))
+            if (Input.GetAxisRaw("Vertical") == 1f && !(GameController.control.spaceOn + 2 > boardSpaces.Length - 1) && !loadNewScene)
             {
                 GameController.control.spaceOn += 2;
             }
-            if (Input.GetAxisRaw("Vertical") == -1f && !(GameController.control.spaceOn - 2 < 0))
+            if (Input.GetAxisRaw("Vertical") == -1f && !(GameController.control.spaceOn - 2 < 0) && !loadNewScene)
             {
                 GameController.control.spaceOn -= 2;
             }
