@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+
+    //This class will be mostly for global primitive variables
+    // It will need to be attached to an empty "GameController" object in whatever scene the values are needed
+
     public static GameController control;
-    public int spaceOn;
+    public int spaceOn; // The current board space the player is on
     void Awake()
     {
         if (control == null)
