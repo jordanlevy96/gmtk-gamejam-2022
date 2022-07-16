@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
             {
                 GameController.control.spaceOn++; // iterate the array of board spaces
                 
-                loadNewScene = true; // prepare to load scene
+                //loadNewScene = true; // prepare to load scene
 
             }
             if (Input.GetAxisRaw("Horizontal") == -1f && !(GameController.control.spaceOn - 1 < 0) && !loadNewScene)
