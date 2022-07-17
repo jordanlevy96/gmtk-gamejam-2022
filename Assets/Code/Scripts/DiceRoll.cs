@@ -20,6 +20,7 @@ public class DiceRoll : MonoBehaviour
     private int finalSide;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +40,7 @@ public class DiceRoll : MonoBehaviour
 
     void buttonClick()
     {
-        StartCoroutine("RollTheDice");
+            StartCoroutine("RollTheDice");
     }
 
     // Generate Number and move forward
@@ -61,6 +62,10 @@ public class DiceRoll : MonoBehaviour
 
     private IEnumerator RollTheDice()
     {
+
+        gameObject.GetComponent<Button>().enabled = false; // disbale button while dice is rolling. Is re-enabled in player controller
+
+
         // Variable to contain random dice side number.
         // It needs to be assigned. Let it be 0 initially
         int randomDiceSide = 0;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,12 +11,13 @@ public class GameController : MonoBehaviour
 
     public static GameController control; // Static reference to GameController to save variables between scenes
     public int spaceOn; // The current board space the player is on
-    public int statRoll; // Most recent number rolled TODO: remove
 
     public int numPlayerDice; // player dice pool
     public int numEnemyDice; // enemy dice pool
 
     public int speedMod;
+
+    public int enemySeed;
 
     [HideInInspector]
     public Sprite enemySprite;
@@ -38,6 +40,7 @@ public class GameController : MonoBehaviour
         spaceOn = 0;
         numPlayerDice = 4;
         numEnemyDice = 3;
+        enemySeed = Guid.NewGuid().GetHashCode();
     }
 
     // Update is called once per frame

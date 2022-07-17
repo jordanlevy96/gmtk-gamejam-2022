@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class PlayerController : MonoBehaviour
     private int spacesMovedThisTurn = 0; // Number of spaces moved this turn
     [HideInInspector]
     public int rollValue; // value of dice roll
+
+    public Button rollButton;
 
 
 
@@ -81,7 +84,8 @@ public class PlayerController : MonoBehaviour
                         break;
                     case SpaceController.Modifier.Enemy:
 
-                        GameController.control.enemySprite = boardSpaces[GameController.control.spaceOn].transform.Find("Enemy").GetComponent<SpriteRenderer>().sprite;
+                        GameController.control.enemySprite = boardSpaces[GameController.control.spaceOn].transform.Find("SpotSprite").GetComponent<SpriteRenderer>().sprite; // grab sprite to carry to next scene
+                        SpaceController.rand = new System.Random(GameController.control.enemySeed); // re-init randomizer when scene changes
 
                         //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
                         EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/BattleScreen.unity", new LoadSceneParameters(LoadSceneMode.Single));
@@ -90,6 +94,8 @@ public class PlayerController : MonoBehaviour
                         break;
 
                 }
+
+                rollButton.enabled = true; // re-enable button after it is disabled in DiceRoll.cs
             }
 
             if (spacesMovedThisTurn < rollValue)

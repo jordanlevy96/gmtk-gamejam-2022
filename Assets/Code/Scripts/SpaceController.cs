@@ -21,6 +21,8 @@ public class SpaceController : MonoBehaviour
     public Sprite spdUp;
     public Sprite spdDown;
 
+    public static System.Random rand = new System.Random(GameController.control != null ? GameController.control.enemySeed : 0);
+
     public enum Modifier { AddDice, RemoveDice, SpeedUp, SpeedDown, Nothing, Enemy };
     public enum Enemies { None, Candyman, Knight, Car, Cards, Devil }
 
@@ -77,7 +79,6 @@ public class SpaceController : MonoBehaviour
             default:
                 break;
         }
-
     }
 
     void scaleNonEnemySprites()
@@ -90,7 +91,7 @@ public class SpaceController : MonoBehaviour
     // Set an enemy type if the spot is set to enemy and no type is predefined
     Enemies randomizeEnemy()
     {
-        Enemies outType = (Enemies)Random.Range(1, 5);
+        Enemies outType = (Enemies)rand.Next(1, 5);
         return outType;
     }
 
