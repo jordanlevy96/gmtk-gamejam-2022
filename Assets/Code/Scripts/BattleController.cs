@@ -228,6 +228,6 @@ public class BattleController : MonoBehaviour
 
     private void ReturnToBoard()
     {
-        EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/ChrisTestScene.unity", new LoadSceneParameters(LoadSceneMode.Single));
+        EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/Board.unity", new LoadSceneParameters(LoadSceneMode.Single));
     }
 }
