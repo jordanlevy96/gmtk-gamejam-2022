@@ -51,6 +51,10 @@ public class BattleController : MonoBehaviour
         playerDamage.SetActive(false);
         enemyDamage.SetActive(false);
 
+        // set up enemy sprite
+        GameObject.Find("Enemy").GetComponent<SpriteRenderer>().sprite = GameController.control.enemySprite;
+
+
         // set up buttons
         startButton.onClick.AddListener(StartTurn);
         victory.SetActive(false); // make sure victory stuff is hidden
@@ -224,6 +228,6 @@ public class BattleController : MonoBehaviour
 
     private void ReturnToBoard()
     {
-        EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/Board.unity", new LoadSceneParameters(LoadSceneMode.Single));
+        EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/ChrisTestScene.unity", new LoadSceneParameters(LoadSceneMode.Single));
     }
 }
