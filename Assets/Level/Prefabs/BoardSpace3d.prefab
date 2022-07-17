@@ -56,8 +56,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3890015656064575565}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -0.01}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0.75, z: -0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8178527259237251169}
@@ -276,5 +276,5 @@ MonoBehaviour:
   cards: {fileID: 21300000, guid: e9b3a78ee60a8844c890a741f6975976, type: 3}
   plusDice: {fileID: 21300000, guid: 0771b2b8dd6e52645a03cc8fa3def826, type: 3}
   minusDice: {fileID: 21300000, guid: 57eccec2017966d4db57d224d27e8767, type: 3}
-  spdUp: {fileID: 0}
-  spdDown: {fileID: 0}
+  spdUp: {fileID: 21300000, guid: 5873eae3f237d384ab9d3c9fbc94e668, type: 3}
+  spdDown: {fileID: 21300000, guid: 7c103fad7ea99ed42b9286eaacba990b, type: 3}
