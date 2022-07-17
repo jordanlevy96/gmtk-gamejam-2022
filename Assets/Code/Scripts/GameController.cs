@@ -40,8 +40,8 @@ public class GameController : MonoBehaviour
     void Start()
     {
         spaceOn = 0;
-        numPlayerDice = 4;
-        numEnemyDice = 3;
+        numPlayerDice = 3;
+        numEnemyDice = 1; // will get incremented, so first enemy has 2, next has 3, etc.
         enemySeed = Guid.NewGuid().GetHashCode();
     }
 

@@ -8,12 +8,14 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
 
-    public Button startButton;
+    public GameObject MainCanvas;
+    public GameObject TutorialCanvas;
 
     // Start is called before the first frame update
     void Start()
     {
-        startButton.onClick.AddListener(startGame);
+        MainCanvas.SetActive(true);
+        TutorialCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -22,10 +24,27 @@ public class MainMenu : MonoBehaviour
         
     }
 
-    void startGame()
+    public void StartGame()
     {
         //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
         SceneManager.LoadScene(1); // why async?
+    }  
+    
+    public void GoToCredits()
+    {
+        SceneManager.LoadScene(5);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ToggleTutorial()
+    {
+        bool tutorialState = TutorialCanvas.activeSelf;
+        MainCanvas.SetActive(tutorialState);
+        TutorialCanvas.SetActive(!tutorialState);
     }
 
 }

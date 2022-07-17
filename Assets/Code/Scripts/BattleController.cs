@@ -43,6 +43,8 @@ public class BattleController : MonoBehaviour
     public Sprite[] cardsAnim;
     public Sprite[] devilAnim;
 
+    private int enemyType;
+
     private void UpdateNumberInText(GameObject go, int newVal)
     {
         TextMeshProUGUI textField = go.GetComponent<TextMeshProUGUI>();
@@ -61,7 +63,7 @@ public class BattleController : MonoBehaviour
 
         // set up enemy sprite
         // 1 candyman, 2 knight, 3 car, 4 cards, 5 devil
-        int enemyType = GameController.control.enemyBattleType;
+        enemyType = GameController.control.enemyBattleType;
         switch (enemyType)
         {
             case 1:
@@ -227,6 +229,13 @@ public class BattleController : MonoBehaviour
         {
             victory.SetActive(true);
             startButton.gameObject.SetActive(false);
+
+            if (enemyType == 5) // 5 = devil = final boss
+            {
+                victory.GetComponentInChildren(typeof(Button), true).gameObject.SetActive(false);
+                StartCoroutine("Victory");
+            }
+
         }
     }
 
@@ -267,9 +276,15 @@ public class BattleController : MonoBehaviour
 
     private IEnumerator GameOver()
     {
-        Debug.Log("Game Over");
+        //Debug.Log("Game Over");
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(3);
+    }
+
+    private IEnumerator Victory()
+    {
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene(4);
     }
 }
 

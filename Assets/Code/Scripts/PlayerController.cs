@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
                     case SpaceController.Modifier.Enemy:
 
                         var spriteRender = boardSpaces[GameController.control.spaceOn].transform.Find("SpotSprite").GetComponent<SpriteRenderer>();
+                        GameController.control.numEnemyDice++; // increment enemy dice each time there is a new encounter
 
                         GameController.control.enemySprite = spriteRender.sprite; // grab sprite to carry to next scene
                         // GameController.control.enemyBattleType
