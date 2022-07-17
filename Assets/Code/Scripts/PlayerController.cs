@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -103,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
                         //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
                         // EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/BattleScreen.unity", new LoadSceneParameters(LoadSceneMode.Single));
-                        SceneManager.LoadScene(2);
+                        SceneManager.LoadScene(2, LoadSceneMode.Single);
 
                         break;
                     case SpaceController.Modifier.Nothing:

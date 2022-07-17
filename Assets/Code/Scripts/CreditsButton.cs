@@ -19,7 +19,7 @@ public class CreditsButton : MonoBehaviour
 
     public void GoToCredits()
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(5, LoadSceneMode.Single);
     }
 
 }

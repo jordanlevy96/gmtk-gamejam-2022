@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
 public class BattleController : MonoBehaviour
@@ -271,20 +270,20 @@ public class BattleController : MonoBehaviour
 
     private void ReturnToBoard()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 
     private IEnumerator GameOver()
     {
         //Debug.Log("Game Over");
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(3, LoadSceneMode.Single);
     }
 
     private IEnumerator Victory()
     {
         yield return new WaitForSeconds(4f);
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(4, LoadSceneMode.Single);
     }
 }
 

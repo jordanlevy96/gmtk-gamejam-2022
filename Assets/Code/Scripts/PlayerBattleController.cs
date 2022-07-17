@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,9 +14,6 @@ public class PlayerBattleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/Board.unity", new LoadSceneParameters(LoadSceneMode.Single));
-        }
+        
     }
 }

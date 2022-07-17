@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -34,12 +33,12 @@ public class MainMenu : MonoBehaviour
         GameController.control.enemySeed = Guid.NewGuid().GetHashCode();
 
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }  
     
     public void GoToCredits()
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(5, LoadSceneMode.Single);
     }
 
     public void QuitGame()
