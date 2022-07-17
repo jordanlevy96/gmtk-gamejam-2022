@@ -158,6 +158,7 @@ MonoBehaviour:
   speedMod: 0
   enemySeed: 0
   enemySprite: {fileID: 0}
+  enemyBattleType: 0
 --- !u!4 &213537131
 Transform:
   m_ObjectHideFlags: 0

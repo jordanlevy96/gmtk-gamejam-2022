@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour
 
     [HideInInspector]
     public Sprite enemySprite;
+    [HideInInspector]
+    public int enemyBattleType;
 
     void Awake()
     {
