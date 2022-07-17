@@ -21,7 +21,7 @@ public class SpaceController : MonoBehaviour
     public Sprite spdUp;
     public Sprite spdDown;
 
-    public static System.Random rand = new System.Random(GameController.control.enemySeed);
+    public static System.Random rand = new System.Random(GameController.control != null ? GameController.control.enemySeed : 0);
 
     public enum Modifier { AddDice, RemoveDice, SpeedUp, SpeedDown, Nothing, Enemy };
     public enum Enemies { None, Candyman, Knight, Car, Cards, Devil }
