@@ -39,6 +39,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.FindGameObjectWithTag("Music").GetComponent<MusicHandler>().PlayMusic();
         spaceOn = 0;
         numPlayerDice = 3;
         numEnemyDice = 1; // will get incremented, so first enemy has 2, next has 3, etc.
