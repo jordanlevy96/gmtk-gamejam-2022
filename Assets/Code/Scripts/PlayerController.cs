@@ -101,7 +101,8 @@ public class PlayerController : MonoBehaviour
                         SpaceController.rand = new System.Random(GameController.control.enemySeed); // re-init randomizer when scene changes
 
                         //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
-                        EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/BattleScreen.unity", new LoadSceneParameters(LoadSceneMode.Single));
+                        // EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/BattleScreen.unity", new LoadSceneParameters(LoadSceneMode.Single));
+                        SceneManager.LoadScene(2);
 
                         break;
                     case SpaceController.Modifier.Nothing:

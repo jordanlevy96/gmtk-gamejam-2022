@@ -220,8 +220,7 @@ public class BattleController : MonoBehaviour
         if (playerHealth <= 0)
         {
             // game over
-            // TODO: send back to main menu (which doesn't exist at time of writing)
-            Debug.Log("Game over");
+            StartCoroutine("GameOver"); // do in coroutine for a delay
             startButton.gameObject.SetActive(false); // prevent user from continuing despite being dead
         }
         else if (enemyHealth <= 0)
@@ -263,6 +262,14 @@ public class BattleController : MonoBehaviour
 
     private void ReturnToBoard()
     {
-        EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/Board.unity", new LoadSceneParameters(LoadSceneMode.Single));
+        SceneManager.LoadScene(1);
+    }
+
+    private IEnumerator GameOver()
+    {
+        Debug.Log("Game Over");
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(3);
     }
 }
+
