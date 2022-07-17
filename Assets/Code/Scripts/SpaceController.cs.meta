@@ -3,7 +3,12 @@ guid: b370f4460f0841b4e886b546840b2908
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - devil: {fileID: 21300000, guid: f59aea70cffded34780d88b379958a7c, type: 3}
+  - candyman: {fileID: 21300000, guid: a9aa561810b2cd04394b26b4ea58be7d, type: 3}
+  - knight: {fileID: 21300000, guid: e8f3d37a806e48a46b93dcc2d0755ad8, type: 3}
+  - car: {fileID: 21300000, guid: c0b8049b42d02f04f85f7e55558eaa21, type: 3}
+  - cards: {fileID: 21300000, guid: e9b3a78ee60a8844c890a741f6975976, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
