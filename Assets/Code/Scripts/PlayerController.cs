@@ -45,8 +45,16 @@ public class PlayerController : MonoBehaviour
 
         loadNewScene = false; //Set this when you are ready to load a new scene.
 
-        playerMovePoint.position = boardSpaces[GameController.control.spaceOn].transform.position;
-        transform.position = boardSpaces[GameController.control.spaceOn].transform.position; // Move the player to their last position before scene loads back in
+        var myCurrentPosition = boardSpaces[GameController.control.spaceOn];
+
+        playerMovePoint.position = myCurrentPosition.transform.position;
+        transform.position = myCurrentPosition.transform.position; // Move the player to their last position before scene loads back in
+
+        if(myCurrentPosition.GetComponent<SpaceController>().enemyType != SpaceController.Enemies.None) // if the player is on an enemy square when the scene loads
+        {
+            myCurrentPosition.transform.Find("SpotSprite").GetComponent<SpriteRenderer>().enabled = false;
+        }
+
     }
 
     // Update is called once per frame
@@ -84,11 +92,14 @@ public class PlayerController : MonoBehaviour
                         break;
                     case SpaceController.Modifier.Enemy:
 
-                        GameController.control.enemySprite = boardSpaces[GameController.control.spaceOn].transform.Find("SpotSprite").GetComponent<SpriteRenderer>().sprite; // grab sprite to carry to next scene
+                        var spriteRender = boardSpaces[GameController.control.spaceOn].transform.Find("SpotSprite").GetComponent<SpriteRenderer>();
+
+                        GameController.control.enemySprite = spriteRender.sprite; // grab sprite to carry to next scene
                         SpaceController.rand = new System.Random(GameController.control.enemySeed); // re-init randomizer when scene changes
 
                         //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
                         EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/BattleScreen.unity", new LoadSceneParameters(LoadSceneMode.Single));
+
                         break;
                     case SpaceController.Modifier.Nothing:
                         break;
