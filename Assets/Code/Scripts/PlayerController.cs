@@ -84,7 +84,8 @@ public class PlayerController : MonoBehaviour
                         break;
                     case SpaceController.Modifier.Enemy:
 
-                        GameController.control.enemySprite = boardSpaces[GameController.control.spaceOn].transform.Find("Enemy").GetComponent<SpriteRenderer>().sprite;
+                        GameController.control.enemySprite = boardSpaces[GameController.control.spaceOn].transform.Find("SpotSprite").GetComponent<SpriteRenderer>().sprite; // grab sprite to carry to next scene
+                        SpaceController.rand = new System.Random(GameController.control.enemySeed); // re-init randomizer when scene changes
 
                         //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
                         EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/BattleScreen.unity", new LoadSceneParameters(LoadSceneMode.Single));
