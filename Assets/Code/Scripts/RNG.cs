@@ -4,21 +4,24 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+// Generates dice roll and sets the destination of the player
 public class RNG : MonoBehaviour
 {
 
-    public Button generate;
+    public Button generate; // Dice roll button
 
-    public TMPro.TextMeshProUGUI text;
+    public TMPro.TextMeshProUGUI text; // text that displays dice roll value
 
-    public GameObject Board;
-    public PlayerController Player;
+    public GameObject Board; //board parent object that holds all board spaces
+    public PlayerController Player; // player object (dice)
+    private int rollValue; // value of the dice roll
 
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.Find("Dice").GetComponent<PlayerController>();
-        generate.onClick.AddListener(generateNumberAndMove);
+        Player = GameObject.Find("Dice").GetComponent<PlayerController>(); // Get the dice player object
+        generate.onClick.AddListener(generateNumberAndMove); // Add onClick event for the button
     }
 
     // Update is called once per frame
@@ -27,18 +30,23 @@ public class RNG : MonoBehaviour
         
     }
 
-    // Generate Number and move forward one space
+    // Generate Number and move forward
     void generateNumberAndMove()
     {
-        GameController.control.statRoll = Random.Range(1, 7);
+        rollValue = Random.Range(1, 7); //"roll" a dice. Gets a number inclusivley between 1-6
 
-        text.text = "Value: " + GameController.control.statRoll;
+        
 
-        if (!(GameController.control.spaceOn + 1 > Player.boardSpaces.Length - 1))
+        if (GameController.control.spaceOn + rollValue > Player.boardSpaces.Count - 1)// ifout of range, set the players rollvalue to thye max space
         {
-            GameController.control.spaceOn++;
-            Player.loadNewScene = true; //Move forward and prepare to load scene
+
+            rollValue = Player.boardSpaces.Count - 1 - GameController.control.spaceOn;
+
+
         }
+
+        Player.GetComponent<PlayerController>().rollValue = rollValue;
+        text.text = "You rolled a: " + rollValue; // Set the UI text
     }
 
 

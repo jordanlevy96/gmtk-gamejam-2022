@@ -9,31 +9,41 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
 
-    public float moveSpeed = 5f;
-    public Transform playerMovePoint;
+    public float moveSpeed = 5f; // How fast the dice moves to its new point
+    public Transform playerMovePoint; // The transform that the dice follows
 
-    public GameObject Board;
+    public GameObject Board; // Object holding all the board spaces
     [HideInInspector]
-    public Transform[] boardSpaces;
-    public string spaceMovePointTag;
+    public List<GameObject> boardSpaces = new List<GameObject>(); // Array of the spaces on the board
+    public SpaceController[] modifiers;
+    public string spaceMovePointTag; // Tag of the point the player should move to (used to find the point hovering above the board space)
     [HideInInspector]
-    public bool loadNewScene;
+    public bool loadNewScene; // Flag to indicate it is time to load the next scene
+    
+    private int spacesMovedThisTurn = 0; // Number of spaces moved this turn
+    [HideInInspector]
+    public int rollValue; // value of dice roll
+
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+
         //To keep things organized, remove parent
         playerMovePoint.parent = null;
 
+        rollValue = -1; //No movement on scene start
+
+        GetAllChildren(); // Populate board spaces
         //Get transforms of board spaces
-        boardSpaces = Board.GetComponentsInChildren<Transform>().Where(o => o.tag == spaceMovePointTag).ToArray(); //Using System.Linq "Where" method nicely iterates the array dn does the operations specified
+        //boardSpaces = Board.GetComponentsInChildren<Transform>().Where(o => o.tag == spaceMovePointTag).ToArray(); //Using System.Linq "Where" method nicely iterates the array dn does the operations specified
 
         loadNewScene = false; //Set this when you are ready to load a new scene.
 
-        playerMovePoint.position = boardSpaces[GameController.control.spaceOn].position;
-        transform.position = boardSpaces[GameController.control.spaceOn].position; // Move the player to their last position before scene loads back in
+        playerMovePoint.position = boardSpaces[GameController.control.spaceOn].transform.position;
+        transform.position = boardSpaces[GameController.control.spaceOn].transform.position; // Move the player to their last position before scene loads back in
     }
 
     // Update is called once per frame
@@ -42,40 +52,64 @@ public class PlayerController : MonoBehaviour
         //Gives the dice a smooth transition to the player's move point
         transform.position = Vector3.MoveTowards(transform.position, playerMovePoint.position, moveSpeed * Time.deltaTime);
 
-        playerMovePoint.position = boardSpaces[GameController.control.spaceOn].position; // move the dice's move point to the board space
+        playerMovePoint.position = boardSpaces[GameController.control.spaceOn].transform.GetChild(0).position; // move the dice's move point to the board space
 
-        if (Vector3.Distance(transform.position, playerMovePoint.position) <= .05f && loadNewScene)
+        if (Vector3.Distance(transform.position, playerMovePoint.position) <= .05f) // if player is close to the move point
         {
 
+            if (spacesMovedThisTurn == rollValue)
+            {
+                spacesMovedThisTurn = 0;
+                rollValue = -1; // this will get reset by the next dice roll
 
+                switch (Board.transform.GetChild(GameController.control.spaceOn).gameObject.GetComponent<SpaceController>().modifierType) // Do action depending on modifier type of space
+                {
+                    case SpaceController.Modifier.AddDice:
+                        GameController.control.numPlayerDice++;
+                        break;
 
+                    case SpaceController.Modifier.RemoveDice:
+                        GameController.control.numPlayerDice--;
+                        break;
 
-            //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
-            EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/BattleScreen.unity", new LoadSceneParameters(LoadSceneMode.Single));
+                    case SpaceController.Modifier.SpeedUp:
+                        GameController.control.speedMod++;
+                        break;
 
+                    case SpaceController.Modifier.SpeedDown:
+                        GameController.control.speedMod--;
+                        break;
+                    case SpaceController.Modifier.Enemy:
+                        //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
+                        EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/BattleScreen.unity", new LoadSceneParameters(LoadSceneMode.Single));
+                        break;
+                    case SpaceController.Modifier.Nothing:
+                        break;
 
+                }
+            }
 
-            //if (Input.GetAxisRaw("Horizontal") == 1f && !(GameController.control.spaceOn + 1 > boardSpaces.Length - 1) && !loadNewScene)
-            //{
-            //    GameController.control.spaceOn++; // iterate the array of board spaces
+            if (spacesMovedThisTurn < rollValue)
+            {
+                
+                GameController.control.spaceOn++;
+                spacesMovedThisTurn++;
+                if(Board.transform.GetChild(GameController.control.spaceOn).gameObject.GetComponent<SpaceController>().modifierType == SpaceController.Modifier.Enemy)
+                {
+                    spacesMovedThisTurn = rollValue; // Stop at enemy spot
+                }
+                
+            }
+            
 
-            //    loadNewScene = true; // prepare to load scene
+        }
+    }
 
-            //}
-            //if (Input.GetAxisRaw("Horizontal") == -1f && !(GameController.control.spaceOn - 1 < 0) && !loadNewScene)
-            //{
-            //    GameController.control.spaceOn--;
-            //}
-
-            //if (Input.GetAxisRaw("Vertical") == 1f && !(GameController.control.spaceOn + 2 > boardSpaces.Length - 1) && !loadNewScene)
-            //{
-            //    GameController.control.spaceOn += 2;
-            //}
-            //if (Input.GetAxisRaw("Vertical") == -1f && !(GameController.control.spaceOn - 2 < 0) && !loadNewScene)
-            //{
-            //    GameController.control.spaceOn -= 2;
-            //}
-
+    private void GetAllChildren()
+    {
+        for (int i = 0; i < Board.transform.childCount; i++)
+        {
+            boardSpaces.Add(Board.transform.GetChild(i).gameObject);
         }
     }
 }

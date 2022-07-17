@@ -8,7 +8,16 @@ public class TextRender : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.GetComponent<TextMeshProUGUI>().text = "Stat Value: " + GameController.control.statRoll;
+        if (CompareTag("DiceSpeedText"))
+        {
+            gameObject.GetComponent<TextMeshProUGUI>().text = "Dice Speed: " + GameController.control.speedMod;
+        }
+        else if (CompareTag("DiceNumberText"))
+        {
+            gameObject.GetComponent<TextMeshProUGUI>().text = "Number of Dice: " + GameController.control.numPlayerDice;
+        }
+
+        
     }
 
     // Update is called once per frame

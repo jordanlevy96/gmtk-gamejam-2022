@@ -5,17 +5,17 @@ using UnityEngine;
 public class Billboard : MonoBehaviour
 {
 
-    private Camera camera;
+    private Camera gameCamera;
     // Start is called before the first frame update
     void Start()
     {
-        camera = Camera.main;
+        gameCamera = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(camera.transform);
+        transform.LookAt(gameCamera.transform);
 
         transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
     }
