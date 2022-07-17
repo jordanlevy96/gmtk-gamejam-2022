@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour
     void startGame()
     {
         //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
-        EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/Board.unity", new LoadSceneParameters(LoadSceneMode.Single));
+        SceneManager.LoadScene(1); // why async?
     }
 
 }

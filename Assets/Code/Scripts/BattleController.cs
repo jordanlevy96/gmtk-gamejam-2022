@@ -227,7 +227,7 @@ public class BattleController : MonoBehaviour
 
     private void ReturnToBoard()
     {
-        EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/Board.unity", new LoadSceneParameters(LoadSceneMode.Single));
+        SceneManager.LoadScene(1);
     }
 
     private IEnumerator GameOver()

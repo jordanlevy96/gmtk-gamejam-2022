@@ -51,10 +51,7 @@ public class DiceRoll : MonoBehaviour
 
         if (GameController.control.spaceOn + rollValue > Player.boardSpaces.Count - 1)// ifout of range, set the players rollvalue to thye max space
         {
-
             rollValue = Player.boardSpaces.Count - 1 - GameController.control.spaceOn;
-
-
         }
 
         Player.GetComponent<PlayerController>().rollValue = rollValue;
@@ -71,7 +68,7 @@ public class DiceRoll : MonoBehaviour
         int randomDiceSide = 0;
 
         // Loop to switch dice sides ramdomly
-        // before final side appears. 20 itterations here.
+        // before final side appears. 20 iterations here.
         for (int i = 0; i <= 20; i++)
         {
             // Pick up random value from 0 to 5 (All inclusive)
