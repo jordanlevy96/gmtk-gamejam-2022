@@ -30,6 +30,9 @@ public class BattleController : MonoBehaviour
     public GameObject playerDamage;
     public GameObject enemyDamage;
 
+    public GameObject diceReminder;
+    public GameObject attackPower;
+
     public GameObject victory;
 
     private void UpdateNumberInText(GameObject go, int newVal)
@@ -67,12 +70,18 @@ public class BattleController : MonoBehaviour
         SpawnDice(numPlayerDice, playerStartDie, playerDice);
         playerHealth = numPlayerDice * 6;
         UpdateNumberInText(playerHealthDisplay, playerHealth);
+
+        // Turn the dice reminder off at the start
+        diceReminder.gameObject.SetActive(false);
+        // Turn off the attack power at the start
+        attackPower.gameObject.SetActive(false);
     }
 
     private void SpawnDice(int numDice, GameObject startDie, GameObject[] dice)
     {
         Vector3 originalPos = startDie.transform.position;
-        float offsetY = startDie.transform.localPosition.y * -0.65f;
+        float relativeMove = -0.25f;
+        float offsetY = startDie.transform.localPosition.y * relativeMove;
 
         dice[0] = startDie;
 
@@ -115,6 +124,8 @@ public class BattleController : MonoBehaviour
         // hide damage rolls from last turn
         playerDamage.SetActive(false);
         enemyDamage.SetActive(false);
+        if (!attackPower.gameObject.activeSelf)
+            attackPower.gameObject.SetActive(true);
 
         // start both sets of dice rolling at once
         StartCoroutine("RollEnemyDice");
@@ -132,8 +143,21 @@ public class BattleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Turn off the dice reminder
+        if (diceReminder.gameObject.activeSelf)
+            diceReminder.gameObject.SetActive(false);
+
         if (rollingPlayerDice)
         {
+            // Disable the start turn button while the dice are rolling
+            if (startButton.gameObject.activeSelf)
+                startButton.gameObject.SetActive(false);
+
+            // Remind the player to stop their dice
+            if (!diceReminder.gameObject.activeSelf)
+                diceReminder.gameObject.SetActive(true);
+                
+
             int playerTotal = 0;
             int diceRolled = 0;
             foreach (GameObject die in playerDice)
@@ -159,7 +183,7 @@ public class BattleController : MonoBehaviour
                 }
                 StartCoroutine("FinalizeTurn", enemyDice);
             }
-        }
+        }        
 
         if (playerHealth <= 0)
         {
@@ -193,6 +217,9 @@ public class BattleController : MonoBehaviour
 
         // apply damage after enemy logic is handled
         ApplyDamage();
+
+        // Turn the start turn button back on
+        startButton.gameObject.SetActive(true);
     }
 
     private void ReturnToBoard()
