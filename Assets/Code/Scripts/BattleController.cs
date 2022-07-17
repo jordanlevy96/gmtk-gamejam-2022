@@ -113,8 +113,8 @@ public class BattleController : MonoBehaviour
     private void SpawnDice(int numDice, GameObject startDie, GameObject[] dice)
     {
         Vector3 originalPos = startDie.transform.position;
-        float relativeMove = -0.25f;
-        float offsetY = startDie.transform.localPosition.y * relativeMove;
+        float relativeMove = -1.1f;
+        float offsetY = startDie.transform.GetComponent<RectTransform>().rect.height * relativeMove;
 
         dice[0] = startDie;
 
