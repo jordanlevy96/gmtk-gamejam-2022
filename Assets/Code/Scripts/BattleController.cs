@@ -35,6 +35,14 @@ public class BattleController : MonoBehaviour
 
     public GameObject victory;
 
+    public GameObject Enemy;
+
+    public Sprite[] candymanAnim;
+    public Sprite[] knightAnim;
+    public Sprite[] carAnim;
+    public Sprite[] cardsAnim;
+    public Sprite[] devilAnim;
+
     private void UpdateNumberInText(GameObject go, int newVal)
     {
         TextMeshProUGUI textField = go.GetComponent<TextMeshProUGUI>();
@@ -52,8 +60,28 @@ public class BattleController : MonoBehaviour
         enemyDamage.SetActive(false);
 
         // set up enemy sprite
-        GameObject.Find("Enemy").GetComponent<SpriteRenderer>().sprite = GameController.control.enemySprite;
+        // 1 candyman, 2 knight, 3 car, 4 cards, 5 devil
+        int enemyType = GameController.control.enemyBattleType;
+        switch (enemyType)
+        {
+            case 1:
+                Enemy.GetComponent<Animator>().Play("Candyman Anim");
+                break;
+            case 2:
+                Enemy.GetComponent<Animator>().Play("Knight Anim");
+                break;
+            case 3:
+                Enemy.GetComponent<Animator>().Play("Car Anim");
+                break;
+            case 4:
+                Enemy.GetComponent<Animator>().Play("Card Anim");
+                break;
+            case 5:
+                Enemy.GetComponent<Animator>().Play("Devil Anim");
+                break;
+        }
 
+        //GameObject.Find("CandymanSheet_0").GetComponent<SpriteRenderer>().
 
         // set up buttons
         startButton.onClick.AddListener(StartTurn);
@@ -225,6 +253,13 @@ public class BattleController : MonoBehaviour
         // Turn the start turn button back on
         startButton.gameObject.SetActive(true);
     }
+
+
+    //void animateEnemy()
+    //{
+    //    float animRate = 1.0f;
+    //    Animator.play
+    //}
 
     private void ReturnToBoard()
     {

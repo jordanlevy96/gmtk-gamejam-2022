@@ -95,6 +95,9 @@ public class PlayerController : MonoBehaviour
                         var spriteRender = boardSpaces[GameController.control.spaceOn].transform.Find("SpotSprite").GetComponent<SpriteRenderer>();
 
                         GameController.control.enemySprite = spriteRender.sprite; // grab sprite to carry to next scene
+                        // GameController.control.enemyBattleType
+                        SpaceController spaceScript = boardSpaces[GameController.control.spaceOn].GetComponent<SpaceController>();
+                        GameController.control.enemyBattleType = (int)spaceScript.enemyType;
                         SpaceController.rand = new System.Random(GameController.control.enemySeed); // re-init randomizer when scene changes
 
                         //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
