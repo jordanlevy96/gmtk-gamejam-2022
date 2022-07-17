@@ -10,6 +10,11 @@ public class CameraFollow : MonoBehaviour
     public Vector3 playerOffset;
     private Vector3 velocity = Vector3.zero;
 
+    // Make the camera focus 
+    private void Start()
+    {
+        transform.position = target.position + playerOffset;
+    }
 
     // Use FixedUpdate if there is jittery problems with the camera
     private void LateUpdate()
