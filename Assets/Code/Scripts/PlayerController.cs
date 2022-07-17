@@ -49,10 +49,11 @@ public class PlayerController : MonoBehaviour
         playerMovePoint.position = myCurrentPosition.transform.position;
         transform.position = myCurrentPosition.transform.position; // Move the player to their last position before scene loads back in
 
-        if(myCurrentPosition.GetComponent<SpaceController>().enemyType != SpaceController.Enemies.None) // if the player is on an enemy square when the scene loads
-        {
-            myCurrentPosition.transform.Find("SpotSprite").GetComponent<SpriteRenderer>().enabled = false;
-        }
+        //Console.WriteLine(myCurrentPosition.transform.Find("SpotSprite").GetComponent<SpriteRenderer>().enabled);
+
+        myCurrentPosition.transform.Find("SpotSprite").GetComponent<SpriteRenderer>().enabled = false;
+        //Console.WriteLine("Found enemy space");
+        //Console.WriteLine(myCurrentPosition.transform.Find("SpotSprite").GetComponent<SpriteRenderer>().enabled);
 
     }
 
