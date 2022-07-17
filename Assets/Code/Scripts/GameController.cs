@@ -17,6 +17,9 @@ public class GameController : MonoBehaviour
 
     public int speedMod;
 
+    [HideInInspector]
+    public Sprite enemySprite;
+
     void Awake()
     {
         if (control == null)

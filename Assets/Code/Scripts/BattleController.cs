@@ -48,6 +48,10 @@ public class BattleController : MonoBehaviour
         playerDamage.SetActive(false);
         enemyDamage.SetActive(false);
 
+        // set up enemy sprite
+        GameObject.Find("Enemy").GetComponent<SpriteRenderer>().sprite = GameController.control.enemySprite;
+
+
         // set up buttons
         startButton.onClick.AddListener(StartTurn);
         victory.SetActive(false); // make sure victory stuff is hidden

@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
                 spacesMovedThisTurn = 0;
                 rollValue = -1; // this will get reset by the next dice roll
 
-                switch (Board.transform.GetChild(GameController.control.spaceOn).gameObject.GetComponent<SpaceController>().modifierType) // Do action depending on modifier type of space
+                switch (boardSpaces[GameController.control.spaceOn].GetComponent<SpaceController>().modifierType) // Do action depending on modifier type of space
                 {
                     case SpaceController.Modifier.AddDice:
                         GameController.control.numPlayerDice++;
@@ -80,6 +80,9 @@ public class PlayerController : MonoBehaviour
                         GameController.control.speedMod--;
                         break;
                     case SpaceController.Modifier.Enemy:
+
+                        GameController.control.enemySprite = boardSpaces[GameController.control.spaceOn].transform.Find("Enemy").GetComponent<SpriteRenderer>().sprite;
+
                         //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
                         EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Level/Scenes/BattleScreen.unity", new LoadSceneParameters(LoadSceneMode.Single));
                         break;
