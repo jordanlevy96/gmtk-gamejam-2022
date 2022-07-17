@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SceneManagement;
@@ -26,8 +27,14 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        //TODO: Needs to be changed for final build to be SceneManager.LoadSceneAsync
-        SceneManager.LoadScene(1); // why async?
+        // reset start of game values
+        GameController.control.spaceOn = 0;
+        GameController.control.numPlayerDice = 3;
+        GameController.control.numEnemyDice = 1;
+        GameController.control.enemySeed = Guid.NewGuid().GetHashCode();
+
+
+        SceneManager.LoadScene(1);
     }  
     
     public void GoToCredits()

@@ -2468,7 +2468,7 @@ Tilemap:
       - {fileID: -113946834, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
       - {fileID: 975007087, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
       - {fileID: -428275505, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
-      m_AnimationSpeed: 20
+      m_AnimationSpeed: 20.000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 1, y: -1, z: 0}
@@ -4092,7 +4092,7 @@ Tilemap:
       - {fileID: -113946834, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
       - {fileID: 975007087, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
       - {fileID: -428275505, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
-      m_AnimationSpeed: 20.000002
+      m_AnimationSpeed: 20
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -5, y: 1, z: 0}
@@ -4150,7 +4150,7 @@ Tilemap:
       - {fileID: -113946834, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
       - {fileID: 975007087, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
       - {fileID: -428275505, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
-      m_AnimationSpeed: 20
+      m_AnimationSpeed: 20.000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -4, y: 1, z: 0}
@@ -4904,7 +4904,7 @@ Tilemap:
       - {fileID: -113946834, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
       - {fileID: 975007087, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
       - {fileID: -428275505, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
-      m_AnimationSpeed: 20
+      m_AnimationSpeed: 20.000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -8, y: 2, z: 0}
@@ -9776,7 +9776,7 @@ Tilemap:
       - {fileID: -113946834, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
       - {fileID: 975007087, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
       - {fileID: -428275505, guid: 4f91cd1729a50304e94004946993dee4, type: 3}
-      m_AnimationSpeed: 20.000002
+      m_AnimationSpeed: 20
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 8, y: 6, z: 0}
@@ -11519,12 +11519,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diceSides:
-  - {fileID: 21300000, guid: c062022a2b20efe449684704099969a9, type: 3}
-  - {fileID: 21300000, guid: ce76b87f0dbb8b940b78ee0100d7969d, type: 3}
-  - {fileID: 21300000, guid: c94607d46a45b4642ae57548f27f6420, type: 3}
-  - {fileID: 21300000, guid: 20491aad2631140428864409141f3f8b, type: 3}
-  - {fileID: 21300000, guid: b3868e50376b18b46802b2f585801cbd, type: 3}
-  - {fileID: 21300000, guid: 53676a8234d7fa54b894205d43b77d0f, type: 3}
+  - {fileID: 21300000, guid: 5f8143a761768854291b7e7d8cb1c7df, type: 3}
+  - {fileID: 21300000, guid: 5f6b2098ca2f4a54993a7fb4301d9e2e, type: 3}
+  - {fileID: 21300000, guid: 02692e4a7b4c2a0499fc3b40caf22139, type: 3}
+  - {fileID: 21300000, guid: 2ac7c9c0b1ad54d458a9d8d8abd57312, type: 3}
+  - {fileID: 21300000, guid: 817bcbb6aa7d6194498d71b2b6dcf37e, type: 3}
+  - {fileID: 21300000, guid: 15f6ca7397669b245a4dff8f3fbd5e20, type: 3}
   finalVal: 0
 --- !u!114 &584239398
 MonoBehaviour:
@@ -11546,7 +11546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c062022a2b20efe449684704099969a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f8143a761768854291b7e7d8cb1c7df, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12891,7 +12891,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1580331179}
   - component: {fileID: 1580331178}
-  - component: {fileID: 1580331180}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -12966,18 +12965,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1580331180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1580331177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 108f896546e5fe04abc2c6216804af28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1586934035
 GameObject:
   m_ObjectHideFlags: 0
@@ -13408,12 +13395,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diceSides:
-  - {fileID: 21300000, guid: c062022a2b20efe449684704099969a9, type: 3}
-  - {fileID: 21300000, guid: ce76b87f0dbb8b940b78ee0100d7969d, type: 3}
-  - {fileID: 21300000, guid: c94607d46a45b4642ae57548f27f6420, type: 3}
-  - {fileID: 21300000, guid: 20491aad2631140428864409141f3f8b, type: 3}
-  - {fileID: 21300000, guid: b3868e50376b18b46802b2f585801cbd, type: 3}
-  - {fileID: 21300000, guid: 53676a8234d7fa54b894205d43b77d0f, type: 3}
+  - {fileID: 21300000, guid: 5f8143a761768854291b7e7d8cb1c7df, type: 3}
+  - {fileID: 21300000, guid: 5f6b2098ca2f4a54993a7fb4301d9e2e, type: 3}
+  - {fileID: 21300000, guid: 02692e4a7b4c2a0499fc3b40caf22139, type: 3}
+  - {fileID: 21300000, guid: 2ac7c9c0b1ad54d458a9d8d8abd57312, type: 3}
+  - {fileID: 21300000, guid: 817bcbb6aa7d6194498d71b2b6dcf37e, type: 3}
+  - {fileID: 21300000, guid: 15f6ca7397669b245a4dff8f3fbd5e20, type: 3}
   finalVal: 0
   rolling: 0
 --- !u!114 &2029846819
@@ -13436,7 +13423,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c062022a2b20efe449684704099969a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f8143a761768854291b7e7d8cb1c7df, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
