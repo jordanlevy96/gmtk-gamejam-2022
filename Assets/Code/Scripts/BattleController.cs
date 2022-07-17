@@ -233,6 +233,7 @@ public class BattleController : MonoBehaviour
             if (enemyType == 5) // 5 = devil = final boss
             {
                 victory.GetComponentInChildren(typeof(Button), true).gameObject.SetActive(false);
+                StartCoroutine("Victory");
             }
 
         }
