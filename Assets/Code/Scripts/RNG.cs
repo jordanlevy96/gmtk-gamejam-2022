@@ -11,8 +11,6 @@ public class RNG : MonoBehaviour
 
     public Button generate; // Dice roll button
 
-    public TMPro.TextMeshProUGUI text; // text that displays dice roll value
-
     public GameObject Board; //board parent object that holds all board spaces
     public PlayerController Player; // player object (dice)
     private int rollValue; // value of the dice roll
@@ -46,7 +44,6 @@ public class RNG : MonoBehaviour
         }
 
         Player.GetComponent<PlayerController>().rollValue = rollValue;
-        text.text = "You rolled a: " + rollValue; // Set the UI text
     }
 
 
