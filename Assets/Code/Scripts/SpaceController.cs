@@ -46,8 +46,12 @@ public class SpaceController : MonoBehaviour
                 curSprite.GetComponent<SpriteRenderer>().sprite = minusDice;
                 break;
             case Modifier.SpeedDown:
+                scaleNonEnemySprites();
+                curSprite.GetComponent<SpriteRenderer>().sprite = spdDown;
                 break;
             case Modifier.SpeedUp:
+                scaleNonEnemySprites();
+                curSprite.GetComponent<SpriteRenderer>().sprite = spdUp;
                 break;
             case Modifier.Enemy:
                 if (enemyType == Enemies.None)
@@ -98,6 +102,6 @@ public class SpaceController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
