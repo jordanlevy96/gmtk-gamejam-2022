@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class PlayerController : MonoBehaviour
     private int spacesMovedThisTurn = 0; // Number of spaces moved this turn
     [HideInInspector]
     public int rollValue; // value of dice roll
+
+    public Button rollButton;
 
 
 
@@ -90,6 +93,8 @@ public class PlayerController : MonoBehaviour
                         break;
 
                 }
+
+                rollButton.enabled = true; // re-enable button after it is disabled in DiceRoll.cs
             }
 
             if (spacesMovedThisTurn < rollValue)
